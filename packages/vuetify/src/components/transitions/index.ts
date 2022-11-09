@@ -2,6 +2,7 @@ import {
   createCssTransition,
   createJavascriptTransition,
 } from './createTransition'
+export { createCssTransition, createJavascriptTransition }
 
 import ExpandTransitionGenerator from './expand-transition'
 
