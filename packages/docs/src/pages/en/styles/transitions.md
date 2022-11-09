@@ -96,25 +96,45 @@ Using multiple custom transitions, it is easy to bring a simple todo list to lif
 You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:
 
 ```js
-import { createSimpleTransition } from 'vuetify/components/transitions/createTransition'
+import { createCssTransition } from 'vuetify/components/transitions'
 
-const myTransition = createSimpleTransition('my-transition')
+const myTransition = createCssTransition('my-transition')
 
-Vue.component('my-transition', myTransition)
+export default myTransition
+```
+```js
+import { createVuetify } from 'vuetify'
+import { myTransition } from './myTransition.vue'
+
+export default createVuetify({
+  components: {
+    myTransition,
+  }
+})
 ```
 
-The **createSimpleTransition** function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what `v-fade-transition` looks like:
+The **createCssTransition** function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what `v-fade-transition` looks like:
 
-```stylus
-.fade-transition
-  &-leave-active
-    position: absolute
+```scss
+@use 'vuetify/settings';
 
-  &-enter-active, &-leave, &-leave-to
-    transition: $primary-transition
+.fast-fade-transition {
+  &-enter-active {
+    transition: 0.1s settings.$standard-easing;
+  }
 
-  &-enter, &-leave-to
-    opacity: 0
+  &-leave-active {
+    transition: 0.3s settings.$standard-easing;
+  }
+
+  &-move {
+    transition: transform .4s settings.$standard-easing;
+  }
+
+  &-enter-from, &-leave-to {
+    opacity: 0 !important;
+  }
+}
 ```
 
 <backmatter />
