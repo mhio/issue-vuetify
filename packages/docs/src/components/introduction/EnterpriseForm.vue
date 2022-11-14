@@ -147,10 +147,10 @@
 
     try {
       const res = await emailjs.sendForm(
-        import.meta.env.VITE_EMAILJS_SERVICE_ID,
-        import.meta.env.VITE_EMAILJS_TEMPLATE_ID,
+        'service_9q5ma2n',
+        'template_sei4aji',
         form.value?.$el,
-        import.meta.env.VITE_EMAILJS_PUBLIC_KEY,
+        'KHJbBzLSdOhcpfMt9',
       )
 
       success.value = res.text === 'OK'
